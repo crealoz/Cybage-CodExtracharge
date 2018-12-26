@@ -1,0 +1,10 @@
+<!-- /** * Copyright (c) 1995-2017 Cybage Software Pvt. Ltd., India * http://www.cybage.com/pages/centers-of-excellence/ecommerce/ecommerce.aspx */ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\Checkout\Model\CompositeConfigProvider">
+        <arguments>
+            <argument name="configProviders" xsi:type="array">
+                <item name="cyb_cod_configprovider" xsi:type="object">Cybage\CodExtracharge\Model\CybConfigProvider</item>
+            </argument>
+        </arguments>
+    </type>
+</config>

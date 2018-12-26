@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<!-- /** * Copyright (c) 1995-2017 Cybage Software Pvt. Ltd., India * http://www.cybage.com/pages/centers-of-excellence/ecommerce/ecommerce.aspx */ -->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="creditmemo_totals">
+            <block class="Cybage\CodExtracharge\Block\Sales\Cashondelivery" name="cyb_cod" as="cyb_cod"/>
+        </referenceBlock>
+    </body>
+</page>

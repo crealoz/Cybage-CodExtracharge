@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- /** * Copyright (c) 1995-2017 Cybage Software Pvt. Ltd., India * http://www.cybage.com/pages/centers-of-excellence/ecommerce/ecommerce.aspx */ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Sales:etc/sales.xsd">
+    <section name="quote">
+        <group name="totals">
+            <item name="cyb_cashondelivery" instance="Cybage\CodExtracharge\Model\Total\Quote\Cashondelivery" sort_order="900"/>
+        </group>
+    </section>
+
+    <section name="order_invoice">
+        <group name="totals">
+            <item name="cyb_cashondelivery" instance="Cybage\CodExtracharge\Model\Total\Invoice\Cashondelivery" sort_order="900"/>
+        </group>
+    </section>
+
+    <section name="order_creditmemo">
+        <group name="totals">
+            <item name="cyb_cashondelivery" instance="Cybage\CodExtracharge\Model\Total\Creditmemo\Cashondelivery" sort_order="900"/>
+        </group>
+    </section>
+</config>

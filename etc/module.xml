@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<!-- /** * Copyright (c) 1995-2017 Cybage Software Pvt. Ltd., India * http://www.cybage.com/pages/centers-of-excellence/ecommerce/ecommerce.aspx */ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Module/etc/module.xsd">
+    <module name="Cybage_CodExtracharge" setup_version="1.0.0">
+         <sequence>
+            <module name="Magento_Sales"/>
+            <module name="Magento_Quote"/>
+        </sequence>
+    </module>
+</config>

@@ -1,0 +1,5 @@
+<!-- /** * Copyright (c) 1995-2017 Cybage Software Pvt. Ltd., India * http://www.cybage.com/pages/centers-of-excellence/ecommerce/ecommerce.aspx */ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Cybage\CodExtracharge\Api\CashondeliveryInterface" type="Cybage\CodExtracharge\Model\Cashondelivery" />
+    <preference for="Cybage\CodExtracharge\Api\CashondeliveryCartInterface" type="Cybage\CodExtracharge\Model\CashondeliveryCart" />
+</config>
