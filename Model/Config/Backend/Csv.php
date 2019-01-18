@@ -37,6 +37,7 @@ class Csv extends Value
      * @param \Magento\Framework\App\Config\ScopeConfigInterface $config
      * @param \Magento\Framework\App\Cache\TypeListInterface $cacheTypeList
      * @param CashondeliveryTableInterface $cashondeliveryTableInterface
+     * @param \Magento\Framework\App\Request\Http $httprequest
      * @param \Magento\Framework\Model\ResourceModel\AbstractResource $resource
      * @param \Magento\Framework\Data\Collection\AbstractDb $resourceCollection
      * @param array $data
@@ -47,11 +48,13 @@ class Csv extends Value
         \Magento\Framework\App\Config\ScopeConfigInterface $config,
         \Magento\Framework\App\Cache\TypeListInterface $cacheTypeList,
         CashondeliveryTableInterface $cashondeliveryTableInterface,
+        \Magento\Framework\App\Request\Http $httprequest,
         \Magento\Framework\Model\ResourceModel\AbstractResource $resource = null,
         \Magento\Framework\Data\Collection\AbstractDb $resourceCollection = null,
         array $data = []
     ) {
         parent::__construct($context, $registry, $config, $cacheTypeList, $resource, $resourceCollection, $data);
+        $this->_httprequest = $httprequest;
         $this->cashondeliveryTableInterface = $cashondeliveryTableInterface;
     }
 
@@ -59,13 +62,13 @@ class Csv extends Value
      * call after save
      * @return \Cybage\CodExtracharge\Model\Config\Backend\Csv
      */
-    public function afterSave()
+   public function afterSave()
     {
-        if (empty($_FILES['groups']['tmp_name']['cashondelivery']['fields']['cyb_import']['value'])) {
+        $uploadedFile  = $this->_httprequest->getFiles();
+        if (empty($uploadedFile['groups']['cashondelivery']['fields']['cyb_import']['value']['tmp_name'])) {
             return $this;
         }
-
-        $csvFile = $_FILES['groups']['tmp_name']['cashondelivery']['fields']['cyb_import']['value'];
+        $csvFile = $uploadedFile['groups']['cashondelivery']['fields']['cyb_import']['value']['tmp_name'];
         $this->cashondeliveryTableInterface->saveFromFile($csvFile);
         return parent::afterSave();
     }
