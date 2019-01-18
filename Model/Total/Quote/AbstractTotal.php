@@ -68,6 +68,7 @@ abstract class AbstractTotal extends MageAbstractTotal
         if (!$quote->getId()) {
             return false;
         }
+        $paymentMethodCodes = [];
         $paymentMethodsList = $this->paymentMethodManagement->getList($quote->getId());
         foreach ($paymentMethodsList as $paymentMethod) {
             $paymentMethodCodes[] = $paymentMethod->getCode();
