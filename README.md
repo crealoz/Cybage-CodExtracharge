@@ -12,9 +12,6 @@ For more information about Magento extension mechanism, see Magento plug-ins and
 
 ## Additional information
 For more Magento 2 developer documentation, see Magento 2 Developer Documentation. Also, there you can track backward incompatible changes made in a Magento EE mainline after the Magento 2.0 release.
-# Cash On Delivery for Magento 2
-
-This module is a Cash On Delivery implementation for Magento2 allowing you to define an additional fee based on destination country, region and total amount.
 
 ## Installing in your Magento
 
