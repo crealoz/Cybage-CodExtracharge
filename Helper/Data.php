@@ -13,7 +13,7 @@
  * @category  Apply_Extra_Charge_On_COD_Payment_Method
  * @package   Cybage_CodExtracharge
  * @author    Cybage Software Pvt. Ltd. <Support_ecom@cybage.com>
- * @copyright 1995-2017 Cybage Software Pvt. Ltd., India
+ * @copyright 1995-2019 Cybage Software Pvt. Ltd., India
  *            http://www.cybage.com/pages/centers-of-excellence/ecommerce/ecommerce.aspx
  * @license   http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  */
@@ -30,7 +30,7 @@ use Magento\Store\Model\ScopeInterface;
  * @category  Helper
  * @package   Cybage_CodExtracharge
  * @author    Cybage Software Pvt. Ltd. <Support_ecom@cybage.com>
- * @copyright 1995-2017 Cybage Software Pvt. Ltd., India
+ * @copyright 1995-2019 Cybage Software Pvt. Ltd., India
  * @license   http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  * @version   Release: 1.0.0
  * @link      http://www.cybage.com/pages/centers-of-excellence/ecommerce/ecommerce.aspx
@@ -43,6 +43,8 @@ class Data extends AbstractHelper
 
     /* @const COD label*/
     const XML_COD_LABEL = 'payment/cashondelivery/cyb_cod_label';
+    /* @const COD countrywise enable*/
+    const XML_COD_COUNTRYWISE_ENABLE = 'payment/cashondelivery/cyb_cod_countrywise_enable';
 
     /**
      * Constructor
@@ -77,6 +79,18 @@ class Data extends AbstractHelper
     {
         return $this->scopeConfigInterface->getValue(
             self::XML_COD_LABEL,
+            ScopeInterface::SCOPE_WEBSITE
+        );
+    }
+
+    /**
+     * Get cod enable by countrywise
+     * @return type
+     */
+    public function getCountrywiseCodEnableStatus()
+    {
+        return $this->scopeConfigInterface->getValue(
+            self::XML_COD_COUNTRYWISE_ENABLE,
             ScopeInterface::SCOPE_WEBSITE
         );
     }

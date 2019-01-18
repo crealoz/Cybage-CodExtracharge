@@ -1,4 +1,4 @@
-/* Copyright (c) 1995-2017 Cybage Software Pvt. Ltd., India * http://www.cybage.com/pages/centers-of-excellence/ecommerce/ecommerce.aspx */
+/* Copyright (c) 1995-2019 Cybage Software Pvt. Ltd., India * http://www.cybage.com/pages/centers-of-excellence/ecommerce/ecommerce.aspx */
 define(
     [
         'ko',
@@ -24,11 +24,8 @@ define(
             extraFeeText: ko.observable(''),
             refreshMethod: function () {
                 var serviceUrl;
-
                 var paymentData = quote.paymentMethod();
 
-                // We have to make sure we don't send title to the backend,
-                // otherwise it will fail. Perhaps there is better way to do this.
                 paymentData = JSON.parse(JSON.stringify(paymentData));
                 delete paymentData['title'];
 
@@ -53,6 +50,7 @@ define(
                 ).done(function () {
                     cashondelivery.canShowCashOnDelivery(quote.paymentMethod().method == 'cashondelivery');
                     getTotalsAction([]);
+                    
                     fullScreenLoader.stopLoader();
                 });
             },
@@ -72,7 +70,7 @@ define(
                         if (
                             (quote.paymentMethod().method === window.checkoutConfig.cybPaymentMethod) ||
                             (me.lastDetectedMethod === window.checkoutConfig.cybPaymentMethod) ||
-                            (totals.getSegment('cyb_cashondelivery') && (me.lastDetectedMethod === null))
+                            (totals.getSegment('cyb_codextracharge') && (me.lastDetectedMethod === null))
                         ) {
                             me.refreshMethod();
                         }

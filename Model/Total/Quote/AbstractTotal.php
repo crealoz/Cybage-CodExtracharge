@@ -13,7 +13,7 @@
  * @category  Apply_Extra_Charge_On_COD_Payment_Method
  * @package   Cybage_CodExtracharge
  * @author    Cybage Software Pvt. Ltd. <Support_ecom@cybage.com>
- * @copyright 1995-2017 Cybage Software Pvt. Ltd., India
+ * @copyright 1995-2019 Cybage Software Pvt. Ltd., India
  *            http://www.cybage.com/pages/centers-of-excellence/ecommerce/ecommerce.aspx
  * @license   http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  */
@@ -30,14 +30,16 @@ use Magento\Quote\Model\Quote;
  * @category  class
  * @package   Cybage_CodExtracharge
  * @author    Cybage Software Pvt. Ltd. <Support_ecom@cybage.com>
- * @copyright 1995-2017 Cybage Software Pvt. Ltd., India
+ * @copyright 1995-2019 Cybage Software Pvt. Ltd., India
  * @license   http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  * @version   Release: 1.0.0
  * @link      http://www.cybage.com/pages/centers-of-excellence/ecommerce/ecommerce.aspx
  */
 abstract class AbstractTotal extends MageAbstractTotal
 {
+    /* Constant CYB_PAYMENT_METHOD */
     const CYB_PAYMENT_METHOD = 'cashondelivery';
+
     /**
      * @var PaymentMethodManagementInterface
      */
@@ -67,10 +69,15 @@ abstract class AbstractTotal extends MageAbstractTotal
             return false;
         }
         $paymentMethodsList = $this->paymentMethodManagement->getList($quote->getId());
-        if ((count($paymentMethodsList) == 1) && ($paymentMethodsList[0]->getCode() == self::CYB_PAYMENT_METHOD)) {
-            return true;
+        foreach ($paymentMethodsList as $paymentMethod) {
+            $paymentMethodCodes[] = $paymentMethod->getCode();
         }
-
-        return ($quote->getPayment()->getMethod() == self::CYB_PAYMENT_METHOD);
+        if ((in_array(self::CYB_PAYMENT_METHOD, $paymentMethodCodes)) && ($quote->getPayment()->getMethod() == self::CYB_PAYMENT_METHOD)) {
+            return true;
+        } else if ((count($paymentMethodsList) == 1) && ($paymentMethodsList[0]->getCode() == self::CYB_PAYMENT_METHOD)) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }

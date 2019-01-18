@@ -1,6 +1,9 @@
 <?xml version="1.0"?>
-<!-- /** * Copyright (c) 1995-2017 Cybage Software Pvt. Ltd., India * http://www.cybage.com/pages/centers-of-excellence/ecommerce/ecommerce.aspx */ -->
+<!-- /** * Copyright (c) 1995-2019 Cybage Software Pvt. Ltd., India * http://www.cybage.com/pages/centers-of-excellence/ecommerce/ecommerce.aspx */ -->
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+       <css src="Cybage_CodExtracharge::css/codextracharge.css"/>
+    </head>
     <body>
         <referenceBlock name="checkout.root">
             <arguments>
@@ -14,7 +17,7 @@
                                             <item name="children" xsi:type="array">
                                                 <item name="totals" xsi:type="array">
                                                     <item name="children" xsi:type="array">
-                                                        <item name="cyb_cashondelivery" xsi:type="array">
+                                                        <item name="cyb_codextracharge" xsi:type="array">
                                                             <item name="component"  xsi:type="string">Cybage_CodExtracharge/js/view/checkout/summary/cashondelivery</item>
                                                             <item name="sortOrder" xsi:type="string">35</item>
                                                             <item name="config" xsi:type="array">

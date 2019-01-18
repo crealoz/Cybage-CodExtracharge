@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<!-- /** * Copyright (c) 1995-2019 Cybage Software Pvt. Ltd., India * http://www.cybage.com/pages/centers-of-excellence/ecommerce/ecommerce.aspx */ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+    <add id="Cybage_CodExtracharge::codrate" title="Manage COD rate" module="Cybage_CodExtracharge" sortOrder="10" parent="Magento_Sales::sales" action="custommenu/create/index" resource="Magestore_CustomMenu::menu_item"/>
+    </menu>
+</config>

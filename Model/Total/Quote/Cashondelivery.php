@@ -13,7 +13,7 @@
  * @category  Apply_Extra_Charge_On_COD_Payment_Method
  * @package   Cybage_CodExtracharge
  * @author    Cybage Software Pvt. Ltd. <Support_ecom@cybage.com>
- * @copyright 1995-2017 Cybage Software Pvt. Ltd., India
+ * @copyright 1995-2019 Cybage Software Pvt. Ltd., India
  *            http://www.cybage.com/pages/centers-of-excellence/ecommerce/ecommerce.aspx
  * @license   http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  */
@@ -27,6 +27,7 @@ use Magento\Quote\Api\Data\ShippingAssignmentInterface;
 use Magento\Quote\Model\Quote;
 use Cybage\CodExtracharge\Helper\Data;
 use Magento\Quote\Model\Quote\Address;
+use Cybage\CodExtracharge\Api\CashondeliveryInterface;
 
 /**
  * Cashondelivery
@@ -34,31 +35,39 @@ use Magento\Quote\Model\Quote\Address;
  * @category  class
  * @package   Cybage_CodExtracharge
  * @author    Cybage Software Pvt. Ltd. <Support_ecom@cybage.com>
- * @copyright 1995-2017 Cybage Software Pvt. Ltd., India
+ * @copyright 1995-2019 Cybage Software Pvt. Ltd., India
  * @license   http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  * @version   Release: 1.0.0
  * @link      http://www.cybage.com/pages/centers-of-excellence/ecommerce/ecommerce.aspx
  */
 class Cashondelivery extends AbstractTotal
 {
+
+    /* @var type Magento\Framework\Pricing\PriceCurrencyInterface */
     protected $_priceCurrencyInterface;
+
+    /* @var type Cybage\CodExtracharge\Api\CashondeliveryInterface */
+    protected $_cashOnDeliveryInterface;
+    
 
     /**
      * Constructor
-     *
      * @param PaymentMethodManagementInterface $paymentMethodManagement
-     * @param PriceCurrencyInterface           $priceCurrencyInterface
-     * @param Data                             $cybCodHelper
+     * @param PriceCurrencyInterface $priceCurrencyInterface
+     * @param CashondeliveryInterface $cashOnDeliveryInterface
+     * @param Data $cybCodHelper
      */
     public function __construct(
         PaymentMethodManagementInterface $paymentMethodManagement,
         PriceCurrencyInterface $priceCurrencyInterface,
+        CashondeliveryInterface $cashOnDeliveryInterface,
         Data $cybCodHelper
     ) {
         parent::__construct($paymentMethodManagement);
-        $this->_cybCodeHelper = $cybCodHelper;
+        $this->_cashOnDeliveryInterface = $cashOnDeliveryInterface;
         $this->_priceCurrencyInterface = $priceCurrencyInterface;
-        $this->setCode('cyb_cashondelivery');
+        $this->_cybCodeHelper = $cybCodHelper;
+        $this->setCode('cyb_codextracharge');
     }
 
     /**
@@ -81,12 +90,13 @@ class Cashondelivery extends AbstractTotal
             return $this;
         }
 
-        $baseAmount = $this->_cybCodeHelper->getCybCodAmount();
+        $country = $quote->getShippingAddress()->getCountryModel()->getData('iso2_code');
+        $baseAmount = $this->_cashOnDeliveryInterface->getBaseAmount($total->getAllBaseTotalAmounts(), $country);
         $amount = $this->_priceCurrencyInterface->convert($baseAmount);
 
         if ($this->_canApplyTotal($quote)) {
-            $total->setBaseTotalAmount('cyb_cashondelivery', $baseAmount);
-            $total->setTotalAmount('cyb_cashondelivery', $amount);
+            $total->setBaseTotalAmount('cyb_codextracharge', $baseAmount);
+            $total->setTotalAmount('cyb_codextracharge', $amount);
 
             $total->setBaseCybCodAmount($baseAmount);
             $total->setCybCodAmount($amount);

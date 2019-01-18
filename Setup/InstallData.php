@@ -13,7 +13,7 @@
  * @category  Apply_Extra_Charge_On_COD_Payment_Method
  * @package   Cybage_CodExtracharge
  * @author    Cybage Software Pvt. Ltd. <Support_ecom@cybage.com>
- * @copyright 1995-2017 Cybage Software Pvt. Ltd., India
+ * @copyright 1995-2019 Cybage Software Pvt. Ltd., India
  *            http://www.cybage.com/pages/centers-of-excellence/ecommerce/ecommerce.aspx
  * @license   http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  */
@@ -25,6 +25,8 @@ use Magento\Framework\Setup\ModuleContextInterface;
 use Magento\Framework\Setup\ModuleDataSetupInterface;
 use Magento\Quote\Setup\QuoteSetupFactory;
 use Magento\Sales\Setup\SalesSetupFactory;
+use Magento\Eav\Setup\EavSetup;
+use Magento\Eav\Setup\EavSetupFactory;
 
 /**
  * SalesModelServiceQuoteSubmitBefore
@@ -32,7 +34,7 @@ use Magento\Sales\Setup\SalesSetupFactory;
  * @category  Class
  * @package   Cybage_CodExtracharge
  * @author    Cybage Software Pvt. Ltd. <Support_ecom@cybage.com>
- * @copyright 1995-2017 Cybage Software Pvt. Ltd., India
+ * @copyright 1995-2019 Cybage Software Pvt. Ltd., India
  * @license   http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  * @version   Release: 1.0.0
  * @link      http://www.cybage.com/pages/centers-of-excellence/ecommerce/ecommerce.aspx
@@ -44,6 +46,7 @@ class InstallData implements InstallDataInterface
 
     /* protected $quoteSetupFactory */
     protected $quoteSetupFactory;
+    private $eavSetupFactory;
 
     /**
      * Constructor
@@ -53,10 +56,12 @@ class InstallData implements InstallDataInterface
      */
     public function __construct(
         SalesSetupFactory $salesSetupFactory,
-        QuoteSetupFactory $quoteSetupFactory
+        QuoteSetupFactory $quoteSetupFactory,
+        EavSetupFactory $eavSetupFactory
     ) {
         $this->salesSetupFactory = $salesSetupFactory;
         $this->quoteSetupFactory = $quoteSetupFactory;
+        $this->eavSetupFactory = $eavSetupFactory;
     }
 
     /**
@@ -95,12 +100,12 @@ class InstallData implements InstallDataInterface
      *
      * @return void
      */
-    public function install(ModuleDataSetupInterface $setup, ModuleContextInterface $context)
-    {
+    public function install(
+        ModuleDataSetupInterface $setup,
+        ModuleContextInterface $context
+    ) {
         $setup->startSetup();
-
         $this->_setupSalesTables($setup, $context);
-
         $setup->endSetup();
     }
 }

@@ -12,7 +12,7 @@
  *
  * @category  Apply_Extra_Charge_On_COD_Payment_Method
  * @package   Cybage_CodExtracharge
- * @copyright 1995-2017 Cybage Software Pvt. Ltd., India
+ * @copyright 1995-2019 Cybage Software Pvt. Ltd., India
  *             http://www.cybage.com/pages/centers-of-excellence/ecommerce/ecommerce.aspx
  * @license   http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  * @author    Cybage Software Pvt. Ltd. <Support_ecom@cybage.com>

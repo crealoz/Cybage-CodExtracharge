@@ -13,7 +13,7 @@
  * @category  Apply_Extra_Charge_On_COD_Payment_Method
  * @package   Cybage_CodExtracharge
  * @author    Cybage Software Pvt. Ltd. <Support_ecom@cybage.com>
- * @copyright 1995-2017 Cybage Software Pvt. Ltd., India
+ * @copyright 1995-2019 Cybage Software Pvt. Ltd., India
  *            http://www.cybage.com/pages/centers-of-excellence/ecommerce/ecommerce.aspx
  * @license   http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  */
@@ -29,7 +29,7 @@ use Cybage\CodExtracharge\Helper\Data as cybCodData;
  * @category  Class
  * @package   Cybage_CodExtracharge
  * @author    Cybage Software Pvt. Ltd. <Support_ecom@cybage.com>
- * @copyright 1995-2017 Cybage Software Pvt. Ltd., India
+ * @copyright 1995-2019 Cybage Software Pvt. Ltd., India
  * @license   http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  * @version   Release: 1.0.0
  * @link      http://www.cybage.com/pages/centers-of-excellence/ecommerce/ecommerce.aspx
@@ -44,6 +44,11 @@ class CybConfigProvider implements ConfigProviderInterface
      * @param cybCodData $cybCodHelper
      */
     const CYB_PAYMENT_METHOD = 'cashondelivery';
+
+    /**
+     * Construct
+     * @param cybCodData $cybCodHelper
+     */
     public function __construct(
         cybCodData $cybCodHelper
     ) {

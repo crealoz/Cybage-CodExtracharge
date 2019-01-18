@@ -1,10 +1,10 @@
 <?xml version="1.0"?>
-<!-- /** * Copyright (c) 1995-2017 Cybage Software Pvt. Ltd., India * http://www.cybage.com/pages/centers-of-excellence/ecommerce/ecommerce.aspx */ -->
+<!-- /** * Copyright (c) 1995-2019 Cybage Software Pvt. Ltd., India * http://www.cybage.com/pages/centers-of-excellence/ecommerce/ecommerce.aspx */ -->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Sales:etc/pdf_file.xsd">
     <totals>
-        <total name="cyb_cashondelivery">
+        <total name="cyb_codextracharge">
             <title translate="true">Cash on delivery amount</title>
-            <source_field>cyb_cashondelivery</source_field>
+            <source_field>cyb_codextracharge</source_field>
             <model>Cybage\CodExtracharge\Model\Sales\Pdf\Amount</model>
             <font_size>7</font_size>
             <display_zero>false</display_zero>

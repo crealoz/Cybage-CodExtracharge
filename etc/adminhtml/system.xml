@@ -1,17 +1,40 @@
 <?xml version="1.0"?>
-<!-- /** * Copyright (c) 1995-2017 Cybage Software Pvt. Ltd., India * http://www.cybage.com/pages/centers-of-excellence/ecommerce/ecommerce.aspx */ -->
+<!-- /** * Copyright (c) 1995-2019 Cybage Software Pvt. Ltd., India * http://www.cybage.com/pages/centers-of-excellence/ecommerce/ecommerce.aspx */ -->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
     <system>
         <section id="payment" translate="label" type="text" sortOrder="400" showInDefault="1" showInWebsite="1" showInStore="1">
             <group id="cashondelivery" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
-                <field id="cyb_cod_label" translate="label" type="text" sortOrder="110" showInDefault="1" showInWebsite="1" showInStore="0">
+                 <field id="max_order_total" translate="label,comment" type="text" sortOrder="99" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <comment><![CDATA[ This limit should be including cod charges]]></comment>
+                </field>
+                <field id="cyb_cod_label" translate="label,comment" type="text" sortOrder="110" showInDefault="1" showInWebsite="1" showInStore="0">
                     <label>COD Extra Charge Label</label>
                     <comment><![CDATA[Label you want to show for extra charge on COD payment method ]]></comment>
                 </field>
-                <field id="cyb_cod_amount" translate="label" type="text" sortOrder="112" showInDefault="1" showInWebsite="1" showInStore="0">
+                <field id="cyb_cod_countrywise_enable" translate="label" type="select" sortOrder="111" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Add COD Charges countrywise</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="cyb_cod_amount" translate="label,comment" type="text" sortOrder="112" showInDefault="1" showInWebsite="1" showInStore="0">
                     <label>COD Extra Charge Amount</label>
-                    <comment><![CDATA[Greater than or equal to]]></comment>
+                    <comment><![CDATA[Greater than or equal to zero]]></comment>
                     <validate>validate-number validate-zero-or-greater</validate>
+                    <depends>
+                        <field id="cyb_cod_countrywise_enable">0</field>
+                    </depends>
+                </field>
+                <field id="cyb_export" translate="label" type="Cybage\CodExtracharge\Block\Adminhtml\Form\Field\Export" sortOrder="113" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Export</label>
+                    <depends>
+                        <field id="cyb_cod_countrywise_enable">1</field>
+                    </depends>
+                </field>
+                <field id="cyb_import" translate="label" type="Cybage\CodExtracharge\Block\Adminhtml\Form\Field\Import" sortOrder="114" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Import</label>
+                    <backend_model>Cybage\CodExtracharge\Model\Config\Backend\Csv</backend_model>
+                    <depends>
+                        <field id="cyb_cod_countrywise_enable">1</field>
+                    </depends>
                 </field>
             </group>
         </section>
