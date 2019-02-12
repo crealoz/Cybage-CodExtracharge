@@ -166,15 +166,18 @@ class CashondeliveryTable extends AbstractModel implements CashondeliveryTableIn
         while (false !== ($csvLine = $stream->readCsv())) {
             if (empty($csvLine)) {
                 continue;
-            }
+            } 
 
             $rowNumber++;
 
             $dataRow = [];
 
             for ($i=0; $i < count($headers); $i++) {
+                if (empty($csvLine[$i])) {
+                        continue;
+                }
                 foreach ($this->_columns as $columnName) {
-                    if ($columnName == 'website') {
+                    if ($columnName == 'website' || $columnName == 'country' ) {
                         if (!isset($csvLine[$columnsMap[$columnName]]) || !$csvLine[$columnsMap[$columnName]]) {
                             $csvLine[$columnsMap[$columnName]] = '*';
                         }
@@ -191,9 +194,10 @@ class CashondeliveryTable extends AbstractModel implements CashondeliveryTableIn
                     $dataRow[$columnName] = $value;
                 }
             }
-            $data[] = $dataRow;
+            if(!empty($dataRow)) {
+                $data[] = $dataRow;
+            }
         }
-        
         if ($this->validateRange($data)) {
             $this->_getResource()->populateFromArray($data);
             return $rowNumber;
@@ -250,15 +254,17 @@ class CashondeliveryTable extends AbstractModel implements CashondeliveryTableIn
     public function validateRow($row, $rowNum)
     {
         $websites = $this->getAllWebsiteCodes();
-        if ($row['amount_max'] >= 0 && $row['amount_above'] >= 0 && $row['cod_charge'] >= 0) {
-            if ($row['amount_max'] < $row['amount_above']) {
-                throw new LocalizedException(__('Invalid amount range at row %1', [$rowNum]));
+        if(!empty($row)) {
+            if ($row['amount_max'] >= 0 && $row['amount_above'] >= 0 && $row['cod_charge'] >= 0) {
+                if ($row['amount_max'] < $row['amount_above']) {
+                    throw new LocalizedException(__('Invalid amount range at row %1', [$rowNum]));
+                }
+                if (!in_array(trim($row['website']), $websites)) {
+                    throw new LocalizedException(__('Invalid website code at row %1', [$rowNum]));
+                }
+            } else {
+                throw new LocalizedException(__('Invalid numbers at row %1', [$rowNum]));
             }
-            if (!in_array(trim($row['website']), $websites)) {
-                throw new LocalizedException(__('Invalid website code at row %1', [$rowNum]));
-            }
-        } else {
-            throw new LocalizedException(__('Invalid numbers at row %1', [$rowNum]));
         }
     }
 
