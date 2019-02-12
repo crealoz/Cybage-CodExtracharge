@@ -15,7 +15,7 @@ For more Magento 2 developer documentation, see Magento 2 Developer Documentatio
 
 ## Installing in your Magento
 
-* From your CLI run: ```composer require cybage/codExtracharge```
+* From your CLI run: ```composer require cybage/cod-extracharge```
 * Log-in your Magento backend
 * Go to Stores > Configuration > Sales > Payment Methods > Cash On Delivery
 * Configure Cash On Delivery according to your preferences
