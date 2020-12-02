@@ -21,7 +21,6 @@
 namespace Cybage\CodExtracharge\Helper;
 
 use \Magento\Framework\App\Helper\AbstractHelper;
-use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Store\Model\ScopeInterface;
 
 /**
@@ -46,25 +45,15 @@ class Data extends AbstractHelper
     /* @const COD countrywise enable*/
     const XML_COD_COUNTRYWISE_ENABLE = 'payment/cashondelivery/cyb_cod_countrywise_enable';
 
-    /**
-     * Constructor
-     *
-     * @param ScopeConfigInterface $scopeConfigInterface
-     */
-    public function __construct(
-        ScopeConfigInterface $scopeConfigInterface
-    ) {
-        $this->scopeConfigInterface = $scopeConfigInterface;
-    }
 
     /**
      * Get Cod extra charge amount
      *
-     * @return type float
+     * @return mixed
      */
     public function getCybCodAmount()
     {
-        return $this->scopeConfigInterface->getValue(
+        return $this->scopeConfig->getValue(
             self::XML_COD_AMT,
             ScopeInterface::SCOPE_WEBSITE
         );
@@ -73,11 +62,11 @@ class Data extends AbstractHelper
     /**
      * Get label for cod extra charge
      *
-     * @return type
+     * @return mixed
      */
     public function getCybCodLabel()
     {
-        return $this->scopeConfigInterface->getValue(
+        return $this->scopeConfig->getValue(
             self::XML_COD_LABEL,
             ScopeInterface::SCOPE_WEBSITE
         );
@@ -85,11 +74,11 @@ class Data extends AbstractHelper
 
     /**
      * Get cod enable by countrywise
-     * @return type
+     * @return mixed
      */
     public function getCountrywiseCodEnableStatus()
     {
-        return $this->scopeConfigInterface->getValue(
+        return $this->scopeConfig->getValue(
             self::XML_COD_COUNTRYWISE_ENABLE,
             ScopeInterface::SCOPE_WEBSITE
         );
